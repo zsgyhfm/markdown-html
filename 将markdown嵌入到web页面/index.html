@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑页面</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+<div id="text">
+    <!--写作区-->
+    <textarea id="markdown">
+
+    </textarea>
+</div>
+<!--预览区-->
+<div id="container">
+
+</div>
+</body>
+<!--//引入showdown框架-->
+<script src="../node_modules/showdown/dist/showdown.js"></script>
+<script>
+    //1.创建showdown对象
+    var cover = new showdown.Converter();
+    //2.获得输入的内容
+    var textarea = document.getElementById('markdown');
+    console.log(textarea)
+    //注册键盘事件-enter
+    textarea.onkeydown = function (e) {
+        if (e.keyCode == 13) {
+            cover_html();
+        }
+
+    }
+
+    function cover_html() {
+        var text = textarea.value;
+        //3.将输入的内容转换成html
+        var html = cover.makeHtml(text);
+        //4.将文本加入到页面
+        document.getElementById('container').innerHTML = html;
+    }
+</script>
+</html>
